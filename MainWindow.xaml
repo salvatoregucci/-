@@ -15,16 +15,15 @@
         WindowStartupLocation="Manual">
 
     <Window.Resources>
-        <LinearGradientBrush x:Key="IslandBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#1B1C20" Offset="0"/>
-            <GradientStop Color="#0A0B0D" Offset="0.5"/>
-            <GradientStop Color="#030304" Offset="1"/>
+        <LinearGradientBrush x:Key="CapsuleBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#191A1E" Offset="0"/>
+            <GradientStop Color="#050506" Offset="1"/>
         </LinearGradientBrush>
     </Window.Resources>
 
     <Border x:Name="Island"
-            Background="{StaticResource IslandBrush}"
-            BorderBrush="#46474B"
+            Background="{StaticResource CapsuleBrush}"
+            BorderBrush="#45464A"
             BorderThickness="1"
             CornerRadius="26"
             Padding="14"
@@ -36,10 +35,10 @@
             MouseLeftButtonUp="Island_MouseLeftButtonUp">
 
         <Border.Effect>
-            <DropShadowEffect BlurRadius="24"
+            <DropShadowEffect BlurRadius="26"
                               ShadowDepth="7"
                               Direction="270"
-                              Opacity="0.45"
+                              Opacity="0.48"
                               Color="#000000"/>
         </Border.Effect>
 
@@ -49,7 +48,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Capsule header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -74,14 +72,13 @@
                 <TextBlock x:Name="PageIndicator"
                            Grid.Column="2"
                            Text="1 / 3"
-                           Foreground="#89898E"
+                           Foreground="#88888D"
                            FontSize="10"
                            VerticalAlignment="Center"/>
             </Grid>
 
-            <!-- Expanded pages -->
-            <Grid x:Name="ExpandedContent"
-                  Grid.Row="1"
+            <Grid Grid.Row="1"
+                  x:Name="ExpandedContent"
                   Visibility="Collapsed"
                   Margin="0,10,0,0">
 
@@ -99,119 +96,110 @@
                                    FontSize="12"
                                    Margin="0,2,0,14"/>
 
-                        <Border Background="#191A1E"
-                                BorderBrush="#2D2E32"
+                        <Border Background="#18191D"
+                                BorderBrush="#2A2B30"
                                 BorderThickness="1"
-                                CornerRadius="15"
-                                Padding="13">
+                                CornerRadius="14"
+                                Padding="12">
                             <StackPanel>
-                                <TextBlock Text="iLAND"
-                                           Foreground="#8E8E93"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"/>
+                                <TextBlock Text="NOW PLAYING"
+                                           Foreground="#8C8C92"
+                                           FontSize="10"/>
 
-                                <TextBlock Text="Уведомления Windows"
+                                <TextBlock x:Name="MusicText"
+                                           Text="No active media"
                                            Foreground="White"
-                                           FontSize="14"
-                                           Margin="0,6,0,2"/>
+                                           FontSize="13"
+                                           Margin="0,7,0,0"
+                                           TextTrimming="CharacterEllipsis"/>
 
-                                <TextBlock Text="Наведите курсор, чтобы открыть остров"
-                                           Foreground="#929298"
-                                           FontSize="11"
-                                           TextWrapping="Wrap"/>
+                                <TextBlock x:Name="MediaSourceText"
+                                           Text="Windows media session"
+                                           Foreground="#707075"
+                                           FontSize="10"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </Grid>
 
                 <StackPanel x:Name="SystemPage" Visibility="Collapsed">
-                    <TextBlock Text="СИСТЕМА"
-                               Foreground="#929298"
+                    <TextBlock Text="SYSTEM"
+                               Foreground="#8C8C90"
                                FontSize="10"
-                               Margin="0,0,0,14"/>
+                               Margin="0,0,0,12"/>
 
                     <TextBlock x:Name="CpuText"
-                               Text="CPU  --%"
+                               Text="CPU  --"
                                Foreground="White"
-                               FontSize="13"/>
+                               FontSize="12"/>
 
                     <ProgressBar x:Name="CpuBar"
                                  Maximum="100"
                                  Height="5"
-                                 Margin="0,6,0,16"
-                                 Foreground="#76D96B"
-                                 Background="#292A2E"/>
+                                 Margin="0,5,0,12"
+                                 Foreground="#7ED957"
+                                 Background="#202125"/>
 
                     <TextBlock x:Name="RamText"
-                               Text="RAM  --%"
+                               Text="RAM  --"
                                Foreground="White"
-                               FontSize="13"/>
+                               FontSize="12"/>
 
                     <ProgressBar x:Name="RamBar"
                                  Maximum="100"
                                  Height="5"
-                                 Margin="0,6,0,16"
-                                 Foreground="#65A9FF"
-                                 Background="#292A2E"/>
+                                 Margin="0,5,0,12"
+                                 Foreground="#F7B955"
+                                 Background="#202125"/>
                 </StackPanel>
 
                 <StackPanel x:Name="NotificationsPage" Visibility="Collapsed">
-                    <TextBlock Text="УВЕДОМЛЕНИЯ"
-                               Foreground="#929298"
+                    <TextBlock Text="NOTIFICATIONS"
+                               Foreground="#8C8C90"
                                FontSize="10"
                                Margin="0,0,0,12"/>
 
                     <TextBlock x:Name="NotificationStatusText"
-                               Text="Проверяю доступ Windows к уведомлениям…"
+                               Text="Demo notifications are active"
                                Foreground="#D0D0D4"
                                FontSize="12"
                                TextWrapping="Wrap"/>
-
-                    <TextBlock Text="Для Discord и Spotify включите уведомления в настройках Windows."
-                               Foreground="#88888E"
-                               FontSize="11"
-                               TextWrapping="Wrap"
-                               Margin="0,12,0,0"/>
                 </StackPanel>
 
-                <!-- Page navigation -->
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom">
-                    <Button Content="‹"
+                    <Button Content="●"
                             Click="PreviousPage"
                             Background="Transparent"
-                            Foreground="#A0A0A5"
-                            FontSize="18"
+                            Foreground="#606066"
                             BorderThickness="0"
-                            Padding="8,0"/>
+                            Padding="6,0"/>
 
-                    <Button Content="›"
+                    <Button Content="●"
                             Click="NextPage"
                             Background="Transparent"
-                            Foreground="#A0A0A5"
-                            FontSize="18"
+                            Foreground="#606066"
                             BorderThickness="0"
-                            Padding="8,0"/>
+                            Padding="6,0"/>
                 </StackPanel>
             </Grid>
 
-            <!-- Animated notification card -->
             <Border x:Name="ToastCard"
                     Grid.RowSpan="2"
-                    Visibility="Collapsed"
                     Opacity="0"
+                    Visibility="Collapsed"
                     VerticalAlignment="Top"
                     Margin="0,34,0,0"
-                    Background="#222328"
-                    BorderBrush="#42434A"
+                    Background="#202126"
+                    BorderBrush="#414249"
                     BorderThickness="1"
-                    CornerRadius="16"
-                    Padding="13"
+                    CornerRadius="18"
+                    Padding="14"
                     IsHitTestVisible="False">
 
                 <Border.RenderTransform>
-                    <TranslateTransform x:Name="ToastTransform" Y="-14"/>
+                    <TranslateTransform x:Name="ToastShift" Y="-18"/>
                 </Border.RenderTransform>
 
                 <Grid>
@@ -235,15 +223,16 @@
                                    VerticalAlignment="Center"/>
                     </Border>
 
-                    <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                    <StackPanel Grid.Column="1"
+                                Margin="8,0,0,0">
                         <TextBlock x:Name="ToastApp"
                                    Text="Discord"
-                                   Foreground="#C5C5CA"
+                                   Foreground="#C6C6CA"
                                    FontSize="10"
                                    FontWeight="SemiBold"/>
 
                         <TextBlock x:Name="ToastTitle"
-                                   Text="Новое уведомление"
+                                   Text="New notification"
                                    Foreground="White"
                                    FontSize="13"
                                    FontWeight="SemiBold"
